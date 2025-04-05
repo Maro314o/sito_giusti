@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Globo Interattivo con Pin</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+    #globe-container {
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+    }
+    .pin-wrapper {
+      position: absolute;
+      transform: translate(-50%, -100%);
+      pointer-events: auto;
+    }
+    .custom-pin {
+      width: 50px;
+      height: 50px;
+      background-image: url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="globe-container"></div>
+
+  <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script>
+    const world = Globe()
+      .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+      .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+      (document.getElementById('globe-container'));
+
+    const markerData = [
+      { lat: 45.4642, lng: 9.1900, url: 'https://milano.it' },
+      { lat: 48.8566, lng: 2.3522, url: 'https://paris.fr' },
+      { lat: 40.7128, lng: -74.0060, url: 'https://nyc.gov' }
+    ];
+
+    world.htmlElementsData(markerData)
+      .htmlLat(d => d.lat)
+      .htmlLng(d => d.lng)
+      .htmlElement(d => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'pin-wrapper';
+
+        const pin = document.createElement('div');
+        pin.className = 'custom-pin';
+        pin.onclick = () => window.open(d.url, '_blank');
+
+        wrapper.appendChild(pin);
+        return wrapper;
+      });
+  </script>
+</body>
+</html>
