@@ -28,6 +28,7 @@
 
     <!--Google Webfonts-->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
 </head>
 <body>
 
@@ -139,24 +140,9 @@
         </div><!--End of Header-->
 
         <!--Banner Content-->
-        <div id="banner-content" class="row clearfix">
 
-            <div class="col-38">
-
-                <div class="section-heading">
-                    <h1>A FREE AND SIMPLE LANDING PAGE</h1>
-                    <h2>Namari is a free landing page template you can use for your projects. It is free to use for your
-                        personal and commercial projects, enjoy!</h2>
-                </div>
-
-                <!--Call to Action-->
-                <a href="#" class="button">START CREATING TODAY</a>
-                <!--End Call to Action-->
-
-            </div>
-
-        </div><!--End of Row-->
     </header>
+  <div id="globe-container"></div>
 
     <!--Main Content Area-->
     <main id="content">
@@ -551,6 +537,30 @@
 </div>
 
 <!-- Include JavaScript resources -->
+  <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script>
+    const world = Globe()
+      .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+      .bumpImageUrl('https://unpkg.com/three-globe/example/img/earth-topology.png')
+      (document.getElementById('globe-container'));
+
+    // Dati dei punti
+    const markerData = [
+      { lat: 45.4642, lng: 9.1900, size: 0.3, city: 'Milano', url: 'https://milano.it' },
+      { lat: 48.8566, lng: 2.3522, size: 0.3, city: 'Parigi', url: 'https://paris.fr' },
+      { lat: 40.7128, lng: -74.0060, size: 0.3, city: 'New York', url: 'https://nyc.gov' }
+    ];
+
+    // Configura i punti 3D
+    world.pointsData(markerData)
+      .pointLat(d => d.lat)
+      .pointLng(d => d.lng)
+      .pointAltitude(d => d.size)
+      .pointColor(() => 'red')
+      .pointRadius(0.12)
+      .onPointClick(d => window.open(d.url, '_blank'));
+  </script>
 <script src="js/jquery.1.8.3.min.js"></script>
 <script src="js/wow.min.js"></script>
 <script src="js/featherlight.min.js"></script>

@@ -49,6 +49,10 @@ body {
     overflow-x: hidden;
 }
 
+    #globe-container {
+      width: 100vw;
+      height:100vh;
+    }
 p {
     line-height: 25px;
 }
@@ -306,7 +310,7 @@ section {
     overflow: visible;
     z-index: 9999;
     width: 100%;
-    position: absolute !important;
+    position: relative!important;
 }
 
 #header .row {
