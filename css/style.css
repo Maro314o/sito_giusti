@@ -47,7 +47,10 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-}
+}    #globe-container {
+      width: 100vw;
+      height:100vh;
+    }
 
 p {
     line-height: 25px;
