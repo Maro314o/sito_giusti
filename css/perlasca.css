@@ -123,13 +123,7 @@ a:hover, #header.nav-solid nav a:hover {
 
 /* Banner Background and Text Colors */
 
-#banner_rachel {
-    .banner;
-    background: url("../images/rachel_banner.png") no-repeat center top;
-    background-size:cover;
-}
-#banner_perlasca{
-    .banner;
+#banner{
     background: url("../images/perlasca_banner.png") no-repeat center top;
     background-size:cover;
 }
